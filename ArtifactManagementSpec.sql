@@ -17,3 +17,18 @@ SELECT a.name AS artifact_name, ar.artist_name
 FROM Artifacts a
 JOIN Artists ar ON a.artist_id = ar.artist_id
 WHERE a.artifact_id NOT IN (SELECT artifact_id FROM Bids);
+
+
+SELECT a.name AS artifact_name, ar.artist_name
+FROM Artifacts a
+INNER JOIN Artists ar ON a.artist_id = ar.artist_id;
+
+SELECT b.bid_id, u.username, a.name AS artifact_name, b.bid_amount
+FROM Bids b
+LEFT JOIN Users u ON b.bidder_id = u.user_id
+JOIN Artifacts a ON b.artifact_id = a.artifact_id;
+
+SELECT auc.auction_id, a.name AS artifact_name, c.category_name
+FROM Auctions auc
+INNER JOIN Artifacts a ON auc.artifact_id = a.artifact_id
+RIGHT JOIN Categories c ON a.category_id = c.category_id;
